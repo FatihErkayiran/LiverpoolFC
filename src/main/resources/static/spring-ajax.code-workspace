@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"path": "../../../../../RestMySQL/src/main/resources/static"
+		},
+		{
+			"path": "../../../../../../Web_Workspace/Api consumption"
+		},
+		{
+			"path": "."
+		},
+		{
+			"path": "../../../../../../Web_Workspace"
+		}
+	],
+	"settings": {}
+}

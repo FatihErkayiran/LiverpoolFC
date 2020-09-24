@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<!-- This project shows the basic funcionality of CRUS - Create - READ - Update - DELETE -->
+<!-- There is one .js file (index.js) associated, that will do your API calls and dynamicall display our data -->
+<!-- Detailed notes on how the project works are on the index.js file -->
+
+<head>
+    <!-- USING BOOTSTRAP 4 -->
+    <!-- Meta -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- JavaScript -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="index.js"></script>
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <title>Student Portal</title>
+</head>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Navbar</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Link</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Dropdown
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Something else here</a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+        </li>
+      </ul>
+      <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" id="search" type="search" placeholder="SearchById" aria-label="Search">
+        <button onclick="getOnePlayer()" class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form>
+    </div>
+  </nav>
+<!-- We use the onload on the body as our event that calls our initialize() js function that activates all of our necessary functions -->
+<body class="containter-fluid bg-light" onload ="initialize()">
+    <h2>Add Player to Roster</h2>
+    <!-- This div of id = modals is where all the modals can be written to.  Location of the Modal HTML itself does not matter in this case -->
+    <div id ="modals"></div>
+    <div class="card-footer btn-group" id="delete">
+        <button class="btn btn-danger" onclick="deletePlayer.html">DELETE</button>
+        </div>
+    <!-- Page Content Below -->
+    <div id="pageLayout" class="d-flex row" style="padding-top: 5%">
+        <!-- Cards Displayed on Left -->
+        <div id="cardGroup" class="col-md-9 p2">
+            <!-- The div with id=students is where we write all of our student cards dynamically with js -->
+            <div class="text-center" id="players"><h2></h2></div>
+        </div>
+
+    </div>
+
+    <div class="card bg-dark text-white">
+        <img src="./images/team1.jpg" class="card-img" alt="...">
+        <div class="card-img-overlay">
+          <h5 class="card-title">Liverpool</h5>
+          <p class="card-text">Champions Leauge Group Stage away game.</p>
+          <p class="card-text"></p>
+        </div>
+      </div>
+</body>
+
+<script>
+var id=document.getElementsByClassName("form-control mr-sm-2");
+function findBy(id){
+    var url = "/team/" + id;
+   
+   var xhttpList = new XMLHttpRequest();
+   
+
+  
+   xhttpList.onreadystatechange = function () {
+
+       if (this.readyState == 4 && this.status == 200) {
+           sessionStorage.setItem("player", this.responseText);
+       }
+   };
+   xhttpList.open("GET", url, false);
+   xhttpList.send();
+   console.log("Single player retrieved");
+
+   return sessionStorage.getItem("player");
+
+}
+
+
+
+</script>
+
+</html>
